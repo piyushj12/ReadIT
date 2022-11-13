@@ -4,8 +4,14 @@ const controller=require('../controllers/userController');
 
 router.get('/',controller.homepage);
 
+
 router.get('/login',controller.logIn)
 
+router.post('/login',controller.handleLogIn)
+
 router.get('/signup',controller.signIn);
+
+router.post('/signup',controller.handleSignIn);
+
 
 module.exports =router;
