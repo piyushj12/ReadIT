@@ -1,11 +1,11 @@
-// const mysql=require('mysql');
+const mysql=require('mysql2');
 
-// const connection = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'Tamtum@9548k',
-//     database: 'testdb'
-//   });
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: '<username>',
+    password: '<password>',
+    database: 'blog'
+  });
 
 
-//   module.exports=connection;
+  module.exports=connection;

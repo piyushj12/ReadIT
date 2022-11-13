@@ -1,18 +1,18 @@
 const db=require('../config/db');
 
 exports.homePage=(req,res)=>{
-    res.render('index.ejs');
+    // res.render('index.ejs');
 
-  //  db.query('Select * from testtable',(err,results)=>{
-  //   if(err)
-  //   {
-  //       console.log(err);
-  //   }
-  //   else{
-  //       console.log(results);
-  //     //  res.send("hello world");
-  //   }
-  //  });
+   db.query('Select * from post',(err,results)=>{
+    if(err)
+    {
+        console.log(err);
+    }
+    else{
+        console.log(results);
+        res.send("hello world");
+    }
+   });
 
 }
 
