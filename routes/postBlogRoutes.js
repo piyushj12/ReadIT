@@ -6,7 +6,8 @@ router.get('/',controller.allPosts);
 
 router.get('/:id',controller.getPost);
 
-router.get('/newPost',controller.createPost);
+router.get('/newPost',controller.createNewPost);
+router.post('/newPost', controller.createPost)
 
 router.put('/:id',controller.updatePost);
 
