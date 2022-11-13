@@ -1,10 +1,10 @@
 const db=require('../config/db');
 
-exports.homePage=(req,res)=>{
-  db.query('select * from user')
-  .then(results=>{
-    console.log(results[0]);
-    res.send('hello world');
+exports.allPosts=(req,res)=>{
+  db.query('select * from post')
+  .then(posts=>{
+    console.log(posts[0]);
+    res.render('./posts', {posts: posts[0]});
   }).catch(err=>{
     console.log(err);
   })

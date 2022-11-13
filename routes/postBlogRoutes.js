@@ -2,7 +2,7 @@ const express = require('express');
 const router=express.Router();
 const controller=require('../controllers/postBlogController')
 
-router.get('/',controller.homePage);
+router.get('/',controller.allPosts);
 
 router.get('/:id',controller.getPost);
 

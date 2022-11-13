@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<body>
+    <%if(posts){%>
+        <%posts.forEach(post => {%>
+            <div>
+                id: <%= post.id%>
+                title: <%= post.title%>
+            </div>
+        <%})%>
+    <%}%>
+    <p></p>Hey how are you<p></p>
+</body>
+</html>                        
