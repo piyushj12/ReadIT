@@ -4,8 +4,8 @@ const app=express();
 
 const userRoutes=require('./routes/userRoutes');
 const postBlogRoutes=require('./routes/postBlogRoutes');
-const mysql=require('mysql2');
-const connection=require('./config/db');
+// const mysql=require('mysql2/promise');
+// const connection=require('./config/db');
 app.set('view engine','ejs');
 
 app.use(express.urlencoded({extended:true}));

@@ -1,8 +1,8 @@
-const mysql=require('mysql2');
+const mysql=require('mysql2/promise');
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
     host: 'localhost',
-    user: '<username>',
+    user: 'root',
     password: '<password>',
     database: 'blog'
   });
