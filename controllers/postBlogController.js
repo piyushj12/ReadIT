@@ -1,18 +1,13 @@
 const db=require('../config/db');
 
 exports.homePage=(req,res)=>{
-    // res.render('index.ejs');
-
-   db.query('Select * from post',(err,results)=>{
-    if(err)
-    {
-        console.log(err);
-    }
-    else{
-        console.log(results);
-        res.send("hello world");
-    }
-   });
+  db.query('select * from user')
+  .then(results=>{
+    console.log(results[0]);
+    res.send('hello world');
+  }).catch(err=>{
+    console.log(err);
+  })
 
 }
 
