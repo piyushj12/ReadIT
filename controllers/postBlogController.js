@@ -3,17 +3,22 @@ const db=require('../config/db');
 exports.allPosts=(req,res)=>{
   db.query('select * from post')
   .then(posts=>{
-    console.log(posts[0]);
+ //   console.log(posts[0]);
    // res.render('./posts', {posts: posts[0]});
    res.render('index.ejs');
   }).catch(err=>{
-    console.log(err);
+    console.log("In al post",err);
   })
 
 }
 
 exports.getPost=(req,res)=>{
 
+}
+
+exports.createNewPost = (req, res) => {
+  console.log('in create new post');
+  res.render('./createBlog.ejs')
 }
 
 exports.createPost=(req,res)=>{
@@ -33,9 +38,7 @@ exports.createPost=(req,res)=>{
     })
 }
 
-exports.createNewPost = (req, res) => {
 
-}
 
 exports.deletePost=(req,res)=>{
 

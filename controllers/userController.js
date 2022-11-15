@@ -16,14 +16,15 @@ exports.handleSignIn=(req,res)=>{
 
     let email=req.body.email;
     let password=req.body.password;
-    let fname=req.body.first_name;
-    let lname=req.body.last_name;
+    let fname=req.body.firstName;
+    let lname=req.body.lastName;
     let bio=req.body.bio;
     const query=`INSERT INTO USER(first_name,last_name,email,password,bio) values("${fname}","${lname}","${email}","${password}","${bio}");`;
 
     db.query(query)
     .then(results=>{
         console.log('sign up success');
+        return res.redirect('/users/login');
     })
     .catch(err=>{
         console.log(err);
@@ -41,7 +42,11 @@ exports.handleLogIn=(req,res)=>{
     .then(results=>{
         if(results[0].length>0)
         {
-            res.send('login success');
+            console.log(results[0][0].id)
+            req.session.user=results[0][0].id;
+            
+            console.log('login success');
+            return res.redirect('/')
         }
         else{
           res.send('error');
