@@ -7,6 +7,7 @@ exports.homepage=(req,res)=>{
 
 exports.signIn=(req,res)=>{
     //res.render('signup.ejs');
+    res.render('./users/signup.ejs');
     
 }
 
@@ -30,7 +31,7 @@ exports.handleSignIn=(req,res)=>{
 }
 
 exports.logIn=(req,res)=>{
-   res.render('login.ejs')
+   res.render('./users/login.ejs')
 }
 
 exports.handleLogIn=(req,res)=>{
