@@ -1,13 +1,45 @@
-<!DOCTYPE html>
-<body>
+<%- include('./partials/header.ejs') %>
+    <div class="bucket">
+        <div class="center"><h2 style="text-align: center;">All Post
+    </div>  
+
+    <form action="/" method="post">
+         <div>
+        <label for="categories"><h4>Categories:</label>
+        <select id="categories">
+            <%if(categories) {%>
+                <option value="0">All</option>
+                <%categories.forEach(category => {%>
+                    <option value="<%=category.id%>"><%= category.name%></option>
+                <%})%>
+            <%}%>
+         <!-- <option value="Biz">Business</option>
+         <option value="Technology">Technology</option>
+         <option value="Gaming">Gaming</option>
+         <option value="Review">Movie Review</option> -->
+        </select>
+        
+         <button type="submit">Filter</butto>
+  
+    </div>
+    </form>
+   
+
     <%if(posts){%>
         <%posts.forEach(post => {%>
             <div>
-                id: <%= post.id%>
-                title: <%= post.title%>
-            </div>
+                <div class = "left"><%= post.title%></div>
+                <div> <p><%= post.description%><p></div>
+                <div> By:<p><%= post.first_name%> <%= post.last_name%><p></div>
+                <div>On: <%= post.create_date%></div>
+            </div> 
+            <br>
         <%})%>
     <%}%>
-    <p></p>Hey how are you<p></p>
-</body>
-</html>                        
+    
+
+
+  
+
+
+<%- include('./partials/footer.ejs') %>

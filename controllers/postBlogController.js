@@ -1,14 +1,23 @@
 const db=require('../config/db');
 
 exports.allPosts=(req,res)=>{
-  db.query('select * from post')
-  .then(posts=>{
-    console.log(posts[0]);
-   // res.render('./posts', {posts: posts[0]});
-   res.render('index.ejs');
-  }).catch(err=>{
-    console.log(err);
+  console.log("The main page req body is", req);
+  Promise.all([db.query('SELECT p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id'), db.query('SELECT * FROM CATEGORY')])
+  .then(result => {
+    const [posts, categories] = result
+    console.log(posts[0])
+    console.log(categories[0])
+    res.render('./posts', {posts: posts[0], categories: categories[0]})
   })
+
+  // db.query('select * from post')
+  // .then(posts=>{
+  //   console.log(posts[0]);
+  //   res.render('./posts', {posts: posts[0]});
+  // //  res.render('index.ejs');
+  // }).catch(err=>{
+  //   console.log(err);
+  // })
 
 }
 
