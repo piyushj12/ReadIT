@@ -1,12 +1,12 @@
 const db=require('../config/db');
 
 exports.allPosts=(req,res)=>{
-  console.log("The main page req body is", req);
+  //console.log("The main page req body is", req);
   Promise.all([db.query('SELECT p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id'), db.query('SELECT * FROM CATEGORY')])
   .then(result => {
     const [posts, categories] = result
-    console.log(posts[0])
-    console.log(categories[0])
+   // console.log(posts[0])
+    //console.log(categories[0])
     res.render('./posts', {posts: posts[0], categories: categories[0]})
   })
 
@@ -26,7 +26,7 @@ exports.getPost=(req,res)=>{
 }
 
 exports.createNewPost = (req, res) => {
-  console.log('in create new post');
+ // console.log('in create new post');
   res.render('./createBlog.ejs')
 }
 

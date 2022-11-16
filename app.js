@@ -2,13 +2,15 @@ const express=require('express');
 
 const app=express();
 const session=require('express-session');
-
+var methodOverride = require('method-override')
 const userRoutes=require('./routes/userRoutes');
+const mainRoutes=require('./routes/mainRoutes');
 const postBlogRoutes=require('./routes/postBlogRoutes');
 // const mysql=require('mysql2/promise');
 // const connection=require('./config/db');
 app.set('view engine','ejs');
 
+app.use(methodOverride('_method'))
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));
 
@@ -27,10 +29,35 @@ app.use((req,res,next)=>{
 })
 
 
-app.use('/',postBlogRoutes);
 
+app.use('/posts',postBlogRoutes);
+app.use('/',mainRoutes);
 app.use('/users',userRoutes);
+
+
+
 
 app.listen(3000,()=>{
     console.log('app is running');
+})
+
+app.use((req,res,next)=>{
+    console.log('404 error');
+    let err=new Error('The server cannot locate'+ req.url);
+    err.status=404;
+    next(err);
+  
+})
+
+app.use((err,req,res,next)=>{
+    if(!err.status)
+    {
+        err.status=500;
+        err.message=("Internal Server Error");
+
+
+    }
+   
+    res.status(err.status);
+    res.render('error',{error:err});
 })
