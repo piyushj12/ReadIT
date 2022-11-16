@@ -11,6 +11,19 @@
                 <td><input type="textarea" id="description" name="description" required></td>
             </tr>
             <tr>
+                <td><label for="category">Category</label></td>
+                <td>
+                    <select id="category" name="category">
+                        <%if(categories) {%>
+                            <%categories.forEach(category => {%>
+                                <option value="<%=category.id%>"><%= category.name%></option>
+                            <%})%>
+                        <%}%>
+                    </select>
+                </td>
+                  
+            </tr>
+            <tr>
                 <td></td>
                 <td><button>Submit</button></td>
             </tr>
