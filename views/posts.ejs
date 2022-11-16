@@ -28,7 +28,7 @@
     <%if(posts){%>
         <%posts.forEach(post => {%>
             <div>
-                <div class = "left"><%= post.title%></div>
+                <div class = "left"><a href="/posts/<%=post.id%>"><%= post.title%></a> </div>
                 <div> <p><%= post.description%><p></div>
                 <div> By:<p><%= post.first_name%> <%= post.last_name%><p></div>
                 <div>On: <%= post.create_date%></div>

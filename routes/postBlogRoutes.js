@@ -9,7 +9,9 @@ router.get('/new',controller.createNewPost);
 router.get('/:id',controller.getPost);
 
 
-router.post('/newPost', controller.createPost)
+router.post('/newPost', controller.createPost);
+
+router.post('/newComment', controller.createComment);
 
 router.put('/:id',controller.updatePost);
 
