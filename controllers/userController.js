@@ -1,8 +1,8 @@
 const db=require('../config/db');
 
 exports.homepage=(req,res)=>{
-
-    res.render('index.ejs')
+   // console.log('in homepage');
+    res.render('posts.ejs')
 }
 
 exports.signIn=(req,res)=>{

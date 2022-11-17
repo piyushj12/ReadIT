@@ -1,6 +1,6 @@
 exports.goToHome=(req,res)=>
 {
-    res.render('index.ejs');
+   res.send('home page');
 
 }
 

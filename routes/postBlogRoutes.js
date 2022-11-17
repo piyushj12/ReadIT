@@ -1,15 +1,16 @@
 const express = require('express');
 const router=express.Router();
 const controller=require('../controllers/postBlogController')
+const {isAuthenticated} =require('../middleware/authentication');
 
 router.get('/',controller.allPosts);
 
-router.get('/new',controller.createNewPost);
+router.get('/new',isAuthenticated,controller.createNewPost);
 
-router.get('/:id',controller.getPost);
+router.get('/:id',isAuthenticated,controller.getPost);
 
 
-router.post('/newPost', controller.createPost);
+router.post('/new', controller.createPost);
 
 router.post('/newComment', controller.createComment);
 
