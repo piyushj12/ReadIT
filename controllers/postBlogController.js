@@ -32,7 +32,7 @@ db.query('SELECT v.id, v.type, v.user_id from vote as v WHERE v.post_id='+postId
   console.log(post[0])
   console.log(comments[0])
   console.log(votes[0])
-  res.render('./postDetail', {post:post[0][0], comments: comments[0]})
+  res.render('./postDetail', {post:post[0][0], comments: comments[0],votes:votes[0],upvotes:0,downvotes:0})
 })
 .catch(err=> {
   console.log(err);
@@ -82,6 +82,48 @@ exports.createComment = (req, res) => {
   .catch(err => {
     console.log(err);
   })
+}
+
+
+
+exports.upvote = (req, res) => {
+  console.log("in upvote");
+  // let comment = req.body.commentText;
+  let type=1;
+  let postId = parseInt(req.body.post_id);
+  let userID = parseInt(req.session.user);
+  let upvoteQuery = `INSERT INTO VOTE(type, post_id, user_id) values("${type}", "${postId}", "${userID}");`;
+  Promise.all([db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID),db.query(upvoteQuery)])
+  .then(results=>{
+    // const[deleteVoteResult,upVoteResult]=results;
+    // console.log(deleteVoteResult[0]);
+    // console.log(upVoteResult[0]);
+    return res.redirect('/posts/'+postId);
+  })
+  .catch(err=>{
+    console.log(err);
+  });
+
+}
+
+exports.downvote = (req, res) => {
+  console.log("downvote")
+  //console.log(req.body);
+  let type = 0;
+  let postId = parseInt(req.body.post_id);
+  let userID = parseInt(req.session.user);
+  var downVoteQuery = `INSERT INTO VOTE(type, post_id, user_id) values("${type}", "${postId}", "${userID}");`;
+  Promise.all([db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID),db.query(downVoteQuery)])
+  .then(results=>{
+
+    // const[deleteVoteResult,downvoteResult]=results;
+    // console.log(deleteVoteResult[0]);
+    // console.log(downvoteResult[0]);
+    return res.redirect('/posts/'+postId);
+  })
+  .catch(err=>{
+    console.log(err);
+  });
 }
 
 exports.deletePost=(req,res)=>{

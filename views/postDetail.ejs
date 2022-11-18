@@ -6,6 +6,17 @@ Post details:
     By: <%= post.first_name%> <%= post.last_name%>
     On: <%= post.create_date%>
 <%}%>
+
+<%if(votes.length>0){
+    votes.forEach(vote => {
+         if(vote.type==1){
+            upvotes++
+         }else{ 
+            downvotes++
+        }
+    })}%>
+
+
 <br>
 <br>
 <form action = '/posts/newComment' method = 'POST'>
@@ -18,6 +29,21 @@ Post details:
 <br>
 <br>
 
+votes:
+
+      <form action="/posts/upvote" method="POST">
+        <input type="hidden" name="post_id" value="<%= post.id%>">
+        <button type="submit" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-chevron-up"></span> Upvote <%=upvotes %>
+        </button>
+        </form>
+    <form action="/posts/downvote" method="post">
+        <input type="hidden" name="post_id" value="<%= post.id%>">
+        <button type="submit" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-chevron-down"></span> Downvote <%=downvotes %>
+        </button>
+    </form>
+     
 Comments:
 <%if(comments){%>
     <%comments.forEach(c => {%>
