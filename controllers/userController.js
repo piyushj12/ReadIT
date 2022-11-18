@@ -46,7 +46,7 @@ exports.handleLogIn=(req,res)=>{
             req.session.user=results[0][0].id;
             
             console.log('login success');
-            return res.redirect('/')
+            return res.redirect('/posts')
         }
         else{
           res.send('error');
