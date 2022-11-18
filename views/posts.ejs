@@ -1,9 +1,23 @@
 <%- include('./partials/header.ejs') %>
-    <div class="bucket">
-        <div class="center"><h2 style="text-align: center;">All Post
-    </div>  
+
+<div class="container">
 
     <form action="/" method="post">
+    <div class="form-group form-width">
+        <label for="categories">Category</label>
+        <select class="form-control mb-2" id="categories">
+            <%if(categories) {%>
+                <option value="0">All</option>
+                <%categories.forEach(category => {%>
+                    <option value="<%=category.id%>"><%= category.name%></option>
+                <%})%>
+            <%}%>
+        </select>
+        <button type="submit" class="btn btn-primary">Filter</butto>
+    </div>
+    </form>
+
+    <!-- <form action="/" method="post">
          <div>
         <label for="categories"><h4>Categories:</label>
         <select id="categories">
@@ -13,33 +27,33 @@
                     <option value="<%=category.id%>"><%= category.name%></option>
                 <%})%>
             <%}%>
-         <!-- <option value="Biz">Business</option>
-         <option value="Technology">Technology</option>
-         <option value="Gaming">Gaming</option>
-         <option value="Review">Movie Review</option> -->
+
         </select>
         
          <button type="submit">Filter</butto>
   
     </div>
-    </form>
+    </form> -->
    
 
     <%if(posts){%>
         <%posts.forEach(post => {%>
-            <div>
-                <div class = "left"><a href="/posts/<%=post.id%>"><%= post.title%></a> </div>
-                <div> <p><%= post.description%><p></div>
-                <div> By:<p><%= post.first_name%> <%= post.last_name%><p></div>
-                <div>On: <%= post.create_date%></div>
-            </div> 
-            <br>
+            <div class="card text-left">
+                <div class="card-header">
+                    <%= post.title%> <span class="badge rounded-pill badge-color"><%= post.name%></span>
+                </div>
+                <div class="card-body">
+                  <p class="card-text"><%= post.description%></p>
+                  <a href="/posts/<%=post.id%>" class="btn btn-primary">Go somewhere</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <%= post.create_date%> by <%= post.first_name%> <%= post.last_name%>
+                </div>
+              </div>
+              <br>
         <%})%>
     <%}%>
     
-
-
-  
-
+</div>
 
 <%- include('./partials/footer.ejs') %>

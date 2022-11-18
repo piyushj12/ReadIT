@@ -2,7 +2,7 @@ const db=require('../config/db');
 
 exports.allPosts=(req,res)=>{
   //console.log("The main page req body is", req);
-  Promise.all([db.query(' SELECT p.id, p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id'), db.query('SELECT * FROM CATEGORY')])
+  Promise.all([db.query(' SELECT c.name, p.id, p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id INNER JOIN CATEGORY as c ON c.id=p.category_id'), db.query('SELECT * FROM CATEGORY')])
   .then(result => {
     const [posts, categories] = result
    // console.log(posts[0])
