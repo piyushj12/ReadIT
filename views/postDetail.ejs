@@ -8,7 +8,7 @@ Post details:
 <%}%>
 
 <%if(user == post.user_id) {%>
-    <form action = '/posts/editPost/<%= post.id%>' method = 'POST'>
+    <form action = '/posts/<%= post.id%>/editBlog' method = 'GET'>
         <button type="submit">Edit</button>
     </form>
 <%}%>
