@@ -57,3 +57,12 @@ exports.handleLogIn=(req,res)=>{
         console.log(err);
     })
 }
+
+exports.logout=(req,res,next)=>{
+    req.session.destroy(err=>{
+        if(err)
+            next(err);
+        else
+            res.redirect('/users/login');
+    })
+}
