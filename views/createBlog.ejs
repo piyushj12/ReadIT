@@ -1,32 +1,37 @@
 <%- include('./partials/header.ejs') %>
 <div class="container">   
+    <div class="form">
     <form action = '/posts/new' method = 'POST'>
-        <table class="table"> 
-            <tr>
-                <td><label for="title">Title</label></td>
-                <td><input type="text" id="title" name="title" required></td>
-            </tr>
-            <tr>
-                <td><label for="description">description</label></td>
-                <td><input type="textarea" id="description" name="description" required></td>
-            </tr>
-            <tr>
-                <td><label for="category">Category</label></td>
-                <td>
-                    <select id="category" name="category">
-                        <%if(categories) {%>
-                            <%categories.forEach(category => {%>
-                                <option value="<%=category.id%>"><%= category.name%></option>
-                            <%})%>
-                        <%}%>
-                    </select>
-                </td>
-                  
-            </tr>
-            <tr>
-                <td></td>
-                <td><button>Submit</button></td>
-            </tr>
+        <div class="row mb-3">
+            <label for="title" class="col-sm-3 col-form-label text-center">Title</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            
+        </div>
+        <div class="row mb-3">
+            <label for="description" class="col-sm-3 col-form-label text-center">description</label>
+            <div class="col-sm-9">
+                <input type="textarea" class="form-control" id="description" name="description" required>
+            </div>
+            
+        </div>
+        <div class="row mb-3">
+            <label for="category" class="col-sm-3 col-form-label text-center">category</label>
+            <div class="col-sm-9">
+                <select id="category" name="category" class="form-select">
+                    <%if(categories) {%>
+                        <%categories.forEach(category => {%>
+                            <option value="<%=category.id%>"><%= category.name%></option>
+                        <%})%>
+                    <%}%>
+                </select>
+            </div>
+            
+        </div>
+        <button class="btn btn-primary btn-create-trade">Submit</button>
+        
     </form>
+    </div>
 </div>
 <%- include('./partials/footer.ejs') %>
