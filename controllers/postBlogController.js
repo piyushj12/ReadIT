@@ -126,10 +126,52 @@ exports.downvote = (req, res) => {
   });
 }
 
+exports.getEditBlog=(req,res)=>{
+  let postId = req.params.id;
+  // db.query('SELECT p.id,p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id INNER JOIN category c on p.category_id=c.id WHERE p.id='+postId)
+  // .then(post=>{
+  //   console.log(post[0]);
+  //   res.render('./editBlog.ejs',{post:post[0][0]});
+  // })
+  // .catch(err=>{
+  //     console.log(err);
+  // });
+
+  const query1='SELECT p.id,p.title,p.description,p.category_id from POST as p INNER JOIN category as c on p.category_id=c.id'
+  const query2='SELECT * FROM CATEGORY'
+
+  Promise.all([db.query('SELECT p.id,p.title,p.description,p.category_id from POST as p INNER JOIN category as c on p.category_id=c.id')
+    ,db.query('SELECT * from CATEGORY')])
+    .then(result=>{
+      
+      const [post,categories]=result;
+      console.log("posts are...."+post[0][0])
+      console.log("categories are...."+categories[0][0]);
+      res.render('./editBlog.ejs',{post:post[0][0],categories:categories[0]});
+      categories
+    })
+    .catch(err=>{
+      console.log(err);
+    });
+    
+}
+
 exports.deletePost=(req,res)=>{
 
 }
 
-exports.updatePost=(req,res)=>{
-    
+exports.updateBlog=(req,res)=>{
+let postId=req.params.id;
+let title=req.body.title;
+let description=req.body.description;
+let categoryId =  parseInt(req.body.category);
+db.query('UPDATE post SET title=? ,description=? ,category_id=? where id=?',[title,description,categoryId,postId])
+.then(result=>{
+  console.log(result[0])
+  return res.redirect('/posts/'+postId);
+})
+.catch(err=>
+  {
+    console.log(err);
+  })
 }
