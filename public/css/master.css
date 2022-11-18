@@ -18,8 +18,8 @@
 .logo {
     font-family: 'Montserrat';
     font-weight: bold;
-    color: #59C2B6!important;
-    font-size: 25px;
+    color: #000!important;
+    font-size: 28px;
     padding-left: .5rem;
     padding-right: .5rem;
 }
@@ -43,6 +43,10 @@
     color: #59C2B6!important;
   }
 
+  /*Header background*/
+  .header-footer-background {
+    background-image: linear-gradient(to right, #FC575E, #F7B42C);
+  }
 /* main css */
 .main-content-title {
     color: #59C2B6;
