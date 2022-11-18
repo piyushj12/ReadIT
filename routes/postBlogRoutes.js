@@ -14,13 +14,15 @@ router.post('/new', controller.createPost);
 
 router.post('/newComment', controller.createComment);
 
+router.post('/deleteComment', controller.deleteComment);
+
 router.post('/upvote', controller.upvote);
 
 router.post('/downvote', controller.downvote);
 
 router.put('/:id',controller.updatePost);
 
-router.delete('/:id',controller.deletePost);
+router.post('/delete/:id',controller.deletePost);
 
 
 module.exports =router;

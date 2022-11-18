@@ -23,9 +23,9 @@ exports.allPosts=(req,res)=>{
 
 exports.getPost=(req,res)=>{
   let postId = req.params.id;
-  Promise.all([db.query('SELECT p.id,p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id INNER JOIN category c on p.category_id=c.id WHERE p.id='+postId)
+  Promise.all([db.query('SELECT p.id,p.title, p.description,p.user_id, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id INNER JOIN category c on p.category_id=c.id WHERE p.id='+postId)
 
-,db.query('SELECT c.id, c.comment, c.create_date, u.first_name, u.last_name FROM comment as c INNER JOIN USER as u on c.user_id=u.id WHERE c.post_id='+postId +' '+ 'ORDER BY c.create_date DESC'), 
+,db.query('SELECT c.id, c.comment, c.create_date, c.user_id,u.first_name, u.last_name FROM comment as c INNER JOIN USER as u on c.user_id=u.id WHERE c.post_id='+postId +' '+ 'ORDER BY c.create_date DESC'), 
 db.query('SELECT v.id, v.type, v.user_id from vote as v WHERE v.post_id='+postId)])
 .then(result => {
   const [post, comments, votes] = result;
@@ -84,6 +84,21 @@ exports.createComment = (req, res) => {
   })
 }
 
+exports.deleteComment = (req, res) => {
+  console.log("Delete coment")
+  let commentID = req.body.comment_id;
+  let postID = req.body.post_id;
+  let deleteCommentQuery = `DELETE FROM COMMENT WHERE id = `+commentID;
+  db.query(deleteCommentQuery)
+  .then(result => {
+    return res.redirect('/posts/'+postID);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+
+}
+
 
 
 exports.upvote = (req, res) => {
@@ -127,7 +142,16 @@ exports.downvote = (req, res) => {
 }
 
 exports.deletePost=(req,res)=>{
-
+  console.log("Delete post", req.params.id);
+  let postID = req.params.id;
+  Promise.all([db.query(`DELETE FROM COMMENT WHERE post_id="${postID}"`), db.query(`DELETE FROM VOTE WHERE post_id="${postID}"`)])
+  .then(result => {
+    db.query(`DELETE FROM POST WHERE id="${postID}"`);
+    res.redirect('/posts');
+  })
+  .catch(err => {
+    console.log(err);
+  })
 }
 
 exports.updatePost=(req,res)=>{
