@@ -4,7 +4,7 @@ const controller=require('../controllers/postBlogController')
 const {isAuthenticated} =require('../middleware/authentication');
 
 router.get('/',controller.allPosts);
-
+router.post('/',controller.getByCategory);
 router.get('/new',isAuthenticated,controller.createNewPost);
 
 router.get('/:id',isAuthenticated,controller.getPost);
