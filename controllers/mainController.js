@@ -6,7 +6,7 @@ exports.goToHome=(req,res)=>
 
 exports.about=(req,res)=>
 {
-   res.send('about page')
+   res.render('./main/about')
 }
 
 
