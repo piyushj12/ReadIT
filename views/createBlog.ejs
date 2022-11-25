@@ -1,5 +1,5 @@
 <%- include('./partials/header.ejs') %>
-<div class="container">   
+<div class="container form-width">   
     <div class="form">
     <form action = '/posts/new' method = 'POST'>
         <div class="row mb-3">
@@ -29,7 +29,9 @@
             </div>
             
         </div>
-        <button class="btn btn-primary btn-create-trade">Submit</button>
+        <div class="form-group">
+            <button  class="btn btn-outline-success">Create</button>
+        </div>
         
     </form>
     </div>

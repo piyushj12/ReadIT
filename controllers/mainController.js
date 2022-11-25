@@ -1,6 +1,6 @@
 exports.goToHome=(req,res)=>
 {
-   res.send('home page');
+   res.redirect('/posts');
 
 }
 
@@ -12,5 +12,5 @@ exports.about=(req,res)=>
 
 exports.contact=(req,res)=>
 {
-    res.send('contact page');
+    res.render('./main/contact');
 }
