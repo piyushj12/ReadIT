@@ -7,7 +7,8 @@ exports.allPosts=(req,res)=>{
     const [posts, categories] = result
    // console.log(posts[0])
     //console.log(categories[0])
-    res.render('./posts', {posts: posts[0], categories: categories[0]})
+   // console.log(req.body.categories);
+    res.render('./posts', {posts: posts[0], categories: categories[0],selectedCategory:0})
   })
 
   // db.query('select * from post')
@@ -18,6 +19,30 @@ exports.allPosts=(req,res)=>{
   // }).catch(err=>{
   //   console.log(err);
   // })
+
+}
+
+exports.getByCategory=(req,res)=>{
+
+  console.log("req body is",req.body.categories);
+  let cat=req.body.categories;
+  if(cat==0)
+    return res.redirect('/posts');
+  //let query=`SELECT * FROM POST where category_id=`+req.body.categories;
+  Promise.all([db.query(' SELECT c.name, p.id, p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id INNER JOIN CATEGORY as c ON c.id=p.category_id where p.category_id='+cat),db.query('SELECT * FROM CATEGORY')])
+  .then(result=>{
+    const [posts, categories] = result
+    // console.log("posts are"+posts[0]);
+    // console.log("cats are",categories[0])
+    res.render('./posts', {posts: posts[0], categories: categories[0],selectedCategory:cat})
+
+  })
+  .catch(err=>
+    {
+        console.log(err);
+    });
+
+
 
 }
 
