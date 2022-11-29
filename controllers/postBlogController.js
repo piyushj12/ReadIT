@@ -133,16 +133,32 @@ exports.upvote = (req, res) => {
   let postId = parseInt(req.body.post_id);
   let userID = parseInt(req.session.user);
   let upvoteQuery = `INSERT INTO VOTE(type, post_id, user_id) values("${type}", "${postId}", "${userID}");`;
-  Promise.all([db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID),db.query(upvoteQuery)])
-  .then(results=>{
-    // const[deleteVoteResult,upVoteResult]=results;
-    // console.log(deleteVoteResult[0]);
-    // console.log(upVoteResult[0]);
-    return res.redirect('/posts/'+postId);
+
+  db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID)
+  .then(result=>{
+    db.query(upvoteQuery)
+    .then(vote=>
+      {
+        console.log(vote);
+        return res.redirect('/posts/'+postId);
+      })
+      .catch(err1=>{
+        console.log(err1);
+      })
   })
   .catch(err=>{
     console.log(err);
-  });
+  })
+  // Promise.all([db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID),db.query(upvoteQuery)])
+  // .then(results=>{
+  //   // const[deleteVoteResult,upVoteResult]=results;
+  //   // console.log(deleteVoteResult[0]);
+  //   // console.log(upVoteResult[0]);
+  //   return res.redirect('/posts/'+postId);
+  // })
+  // .catch(err=>{
+  //   console.log(err);
+  // });
 
 }
 
@@ -153,17 +169,31 @@ exports.downvote = (req, res) => {
   let postId = parseInt(req.body.post_id);
   let userID = parseInt(req.session.user);
   var downVoteQuery = `INSERT INTO VOTE(type, post_id, user_id) values("${type}", "${postId}", "${userID}");`;
-  Promise.all([db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID),db.query(downVoteQuery)])
-  .then(results=>{
+  db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID)
+  .then(result=>{
+    db.query(downVoteQuery)
+    .then(vote=>{
+      console.log(vote);
+      return res.redirect('/posts/'+postId);
+    })
+    .catch(err1=>{
+      console.log(err1);
+    })
 
-    // const[deleteVoteResult,downvoteResult]=results;
-    // console.log(deleteVoteResult[0]);
-    // console.log(downvoteResult[0]);
-    return res.redirect('/posts/'+postId);
+
   })
   .catch(err=>{
     console.log(err);
-  });
+  })
+
+
+  // Promise.all([db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID),db.query(downVoteQuery)])
+  // .then(results=>{
+  //   return res.redirect('/posts/'+postId);
+  // })
+  // .catch(err=>{
+  //   console.log(err);
+  // });
 }
 
 exports.getEditBlog=(req,res)=>{
