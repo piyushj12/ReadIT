@@ -35,7 +35,7 @@ exports.logIn=(req,res)=>{
    res.render('./users/login.ejs')
 }
 
-exports.handleLogIn=(req,res)=>{
+exports.handleLogIn=(req,res,next)=>{
     let email=req.body.email;
     let password=req.body.password;
     db.query('SELECT * from user WHERE email = ? AND password = ?',[email,password])
@@ -49,12 +49,14 @@ exports.handleLogIn=(req,res)=>{
             return res.redirect('/posts')
         }
         else{
-          res.send('error');
+            req.flash('error','wrong email or password')
+            res.redirect('/users/login')
         }
         
     })
     .catch(err=>{
         console.log(err);
+        next(err);
     })
 }
 
