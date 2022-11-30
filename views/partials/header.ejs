@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReadIt</title>
+<!-- <link href="/css/styles.css" rel="stylesheet" type="text/css"/> -->
+<!-- <link rel="stylesheet" href="../../public/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> -->
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/master.css">
+        <link rel="stylesheet" href="/fonts/font-montserrat.css">
+		<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+</head>
+<body>
+	<div class="wrapper">
+		<header class="header-footer-background shadow-md p-3 mb-5">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container-fluid">
+					<a class="navbar-brand logo" href="/"><img class="logo-img" src="/images/readitlogo.png"></a>
+
+					<div class="navbar-collapse" id="navbarNavDropdown">
+						<ul class="navbar-nav">
+							<li class="nav-item">
+								<a class="nav-link active header-menu-item" aria-current="page"
+									href="/posts">Posts</a>
+							</li>
+							<%if(user) {%>
+								<li class="nav-item">
+									<a class="nav-link active header-menu-item" aria-current="page"
+										href="/posts/new">Create New Post</a>
+								</li>
+							<%}%>
+						</ul>
+					</div>
+					<ul class="navbar-nav justify-content-end">
+						
+						<%if(!user) {%>
+						<li class="nav-item">
+							<a class="nav-link btn-readit-header" href="/users/login">Login</a>
+						</li>
+						<li class="nav-item">
+							<a href="/users/signup" class="nav-link btn-readit-header">Sign Up</a>
+						</li>
+						<%}  else {%>
+						<li class="nav-item">
+							<a class="nav-link btn-readit-header" href="/users/logout">Logout</a>
+						</li>
+						<%}%>
+					</ul>
+				</div>
+			</nav>
+
+			<%if(errorMessages.length > 0) {
+				errorMessages.forEach(message => {%>
+					
+					<div><%= message%></div>
+				<%})
+			}%>
+		
+			<%if(successMessages.length > 0) {
+				successMessages.forEach(message => {%>
+					<div><%= message%></div>
+				<%})
+			}%>
+		</header>
+
+		<main>
+<!-- <body>
+	<div class="header">
+  		<div class="bucket"> 
+        	<div id="float-right">
+            	<nav class="navbar">
+					<a href="/users/login">Log in</a>
+					<a href="/users/signup">Sign up</a>
+               	 	<a href="/posts/new">Create New Post</a>
+             	 	
+            	</nav>
+            </div>
+            <div id="float-none">
+    			<nav>
+    				<a href="/"><img class="logo_image" src="/images/logo.png" alt="ArtDeck_logo"></a>
+					<a href="/home">Home</a>
+				</nav>
+    		</div>
+        </div>
+		<% if(errorMessages.length>0){
+
+			errorMessages.forEach(message=>{ %>
+	
+				<div><%=message%></div>
+				
+		<%    }) } %>
+	
+		
+		<% if(successMessages.length>0){
+	
+			successMessages.forEach(message=>{ %>
+	
+				<div><%=message%></div>
+				
+		<%    }) } %>
+ 	</div> -->

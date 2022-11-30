@@ -1,0 +1,182 @@
+/* common elements */
+.dark-weight-btn{
+    font-weight: bold;
+    padding: 7px;
+}
+
+/*Wrapper*/
+
+.wrapper {
+    height: 100vh;
+    display: flex;
+
+    /* Direction of the items, can be row or column */
+    flex-direction: column;
+}
+
+/* Header */
+.logo {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    color: #FFF!important;
+    font-size: 28px;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    
+}
+
+.logo-img {
+    width: 200px;
+}
+
+.btn-readit-header {
+    background-color: #FFF;
+    font-weight: bold;
+    color: #F7B42C!important;
+    margin-right: 15px;
+    margin-left: 15px;
+    border-color: #F7B42C;
+    border-radius: 10%;
+}
+
+.btn-readit-header:hover {
+    background-color: rgb(255, 249, 249);
+}
+
+.btn-primary {
+    border-color: #FC575E;
+    color: #FFF;
+    background-color: #FC575E;
+}
+
+.btn-primary:hover {
+    border-color: #FC575E;
+    color: #FFF;
+    background-color: #FC575E;
+}
+
+.btn-outline-success {
+    border-color: #F7B42C;
+    color: #F7B42C;
+}
+
+.btn-outline-success:hover {
+    background-color: #FC575E;
+    border-color: #FC575E;
+    color: #FFF;
+}
+
+.header-menu-item {
+    color: white !important;
+}
+  .nav-item .header-menu-item:hover {
+    color: #FFF!important;
+  }
+
+  .nav-item .header-menu-item .btn:hover {
+    color: #FFF!important;
+  }
+
+  /*Header background*/
+  .header-footer-background {
+    background-image: linear-gradient(to right, #FC575E, #F7B42C);
+  }
+/* main css */
+.main-content-title {
+    color: #F7B42C;
+    font-weight: bold;
+
+    font-family: 'Montserrat';
+}
+
+main {
+    flex: 1;
+}
+
+.intro {
+margin-bottom: 20px;
+}
+
+/* footer css */
+.footer-theme {
+    background-color: #000;
+}
+
+.footer-theme ul li a {
+    color: #fff;
+}
+
+.footer-theme .navbar-brand {
+    color: #fff;
+}
+.footer-menu-item {
+    color: #fff;
+}
+
+.footer-menu-item {
+    color: #fff!important;
+}
+
+.footer-menu-item:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    color: #fff!important;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+.form-control {
+    margin-top: 10px;
+}
+
+
+.form-control:focus {
+    border-color: #F7B42C;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #F7B42C;
+  }
+
+  .badge-color {
+    background-color: #F7B42C;
+  }
+
+.form-width {
+    width: 30% !important;
+}
+
+/*
+Our team
+*/
+.img-thumbnail {
+    padding: .25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    max-width: 100%;
+    height: auto;
+}
+
+.social-link {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    border-radius: 50%;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+/*Media Queries*/
+/*Trades */
+@media (max-width: 993px) {
+    .btn-login {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+}

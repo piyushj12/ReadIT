@@ -1,0 +1,38 @@
+<%- include('./partials/header.ejs') %>
+<div class="container">   
+    <div class="form">
+    <form action="/posts/<%=post.id%>?_method=PUT" method="post">
+        <div class="row mb-3">
+            <label for="title" class="col-sm-3 col-form-label text-center">Title</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="title" name="title" value="<%=post.title%>" required>
+            </div>
+            
+        </div>
+        <div class="row mb-3">
+            <label for="description" class="col-sm-3 col-form-label text-center">description</label>
+            <div class="col-sm-9">
+                <input type="textarea" class="form-control" id="description" name="description"  value="<%=post.description%>" required>
+            </div>      
+        </div>
+        <div class="row mb-3">
+            <label for="category" class="col-sm-3 col-form-label text-center">category</label>
+            <div class="col-sm-9">
+                <select id="category" name="category" value="<%= post.category_id%>" class="form-control">
+                    <%if(categories) {%>
+                        <%categories.forEach(category => {%>
+                            <% if(category.id==post.category_id) {%>
+                                <option value="<%=category.id%>" selected><%= category.name%></option>
+                            <% } else { %>
+                            <option value="<%=category.id%>"><%= category.name%></option>
+                            <%} %>
+                        <%})%>
+                    <%}%>
+                </select>
+            </div>      
+        </div>
+        <button class="btn btn-primary btn-create-trade">Submit</button>
+    </form>
+    </div>
+    </div>
+<%- include('./partials/footer.ejs') %>

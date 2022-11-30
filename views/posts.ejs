@@ -1,0 +1,44 @@
+<%- include('./partials/header.ejs') %>
+
+<div class="container">
+
+    <form action="/posts" method="post">
+    <div class="form-group form-width">
+        <label for="categories">Category</label>
+        <select class="form-control mb-2" id="categories" name="categories">
+            <%if(categories) {%>
+                <option value="0">All</option>
+                <%categories.forEach(category => {%>
+                    <% if(category.id==selectedCategory) {%>
+                        <option value="<%=category.id%>" selected><%= category.name%></option>
+                    <% } else { %>
+                    <option value="<%=category.id%>"><%= category.name%></option>
+                    <%} %>
+                <%})%>
+            <%}%>
+        </select>
+        <button type="submit" class="btn btn-primary">Filter</butto>
+    </div>
+    </form>
+
+    <%if(posts){%>
+        <%posts.forEach(post => {%>
+            <div class="card text-left">
+                <div class="card-header">
+                    <%= post.title%> <span class="badge rounded-pill badge-color"><%= post.name%></span>
+                </div>
+                <div class="card-body">
+                  <p class="card-text"><%= post.description%></p>
+                  <a href="/posts/<%=post.id%>" class="btn btn-primary">View Blog</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <%= post.create_date%> by <%= post.first_name%> <%= post.last_name%>
+                </div>
+              </div>
+              <br>
+        <%})%>
+    <%}%>
+    
+</div>
+
+<%- include('./partials/footer.ejs') %>
