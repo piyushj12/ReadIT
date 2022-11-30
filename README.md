@@ -1,6 +1,5 @@
 # Read It Blog
-## Dependencies
-### MySQL:
+### Dependencies
 - We have used MySQL as our database
 - For one time setup you would need to install MySQL server to run the database commands. Optionally you can install MySQL workbench to manage database easily
 - Node.js
