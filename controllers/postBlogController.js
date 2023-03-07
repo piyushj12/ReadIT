@@ -2,24 +2,11 @@ const db=require('../config/db');
 
 exports.allPosts=(req,res)=>{
   //console.log("The main page req body is", req);
-  Promise.all([db.query(' SELECT c.name, p.id, p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id INNER JOIN CATEGORY as c ON c.id=p.category_id'), db.query('SELECT * FROM CATEGORY')])
+  Promise.all([db.query(' SELECT c.name, p.id, p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id INNER JOIN CATEGORY as c ON c.id=p.category_id ORDER BY p.create_date DESC'), db.query('SELECT * FROM CATEGORY')])
   .then(result => {
     const [posts, categories] = result
-   // console.log(posts[0])
-    //console.log(categories[0])
-   // console.log(req.body.categories);
     res.render('./posts', {posts: posts[0], categories: categories[0],selectedCategory:0})
   })
-
-  // db.query('select * from post')
-  // .then(posts=>{
-  //   console.log(posts[0]);
-  //   res.render('./posts', {posts: posts[0]});
-  // //  res.render('index.ejs');
-  // }).catch(err=>{
-  //   console.log(err);
-  // })
-
 }
 
 exports.getByCategory=(req,res)=>{
@@ -149,17 +136,6 @@ exports.upvote = (req, res) => {
   .catch(err=>{
     console.log(err);
   })
-  // Promise.all([db.query('DELETE from VOTE WHERE post_id ='+postId+' ' +'AND user_id ='+userID),db.query(upvoteQuery)])
-  // .then(results=>{
-  //   // const[deleteVoteResult,upVoteResult]=results;
-  //   // console.log(deleteVoteResult[0]);
-  //   // console.log(upVoteResult[0]);
-  //   return res.redirect('/posts/'+postId);
-  // })
-  // .catch(err=>{
-  //   console.log(err);
-  // });
-
 }
 
 exports.downvote = (req, res) => {
@@ -198,19 +174,7 @@ exports.downvote = (req, res) => {
 
 exports.getEditBlog=(req,res)=>{
   let postId = req.params.id;
-  // db.query('SELECT p.id,p.title, p.description, p.create_date, u.first_name, u.last_name FROM POST as p INNER JOIN USER as u ON p.user_id = u.id INNER JOIN category c on p.category_id=c.id WHERE p.id='+postId)
-  // .then(post=>{
-  //   console.log(post[0]);
-  //   res.render('./editBlog.ejs',{post:post[0][0]});
-  // })
-  // .catch(err=>{
-  //     console.log(err);
-  // });
-
-  const query1='SELECT p.id,p.title,p.description,p.category_id from POST as p INNER JOIN category as c on p.category_id=c.id'
-  const query2='SELECT * FROM CATEGORY'
-
-  Promise.all([db.query('SELECT p.id,p.title,p.description,p.category_id from POST as p INNER JOIN category as c on p.category_id=c.id')
+  Promise.all([db.query('SELECT p.id,p.title,p.description,p.category_id from POST as p INNER JOIN category as c on p.category_id=c.id WHERE p.id='+postId)
     ,db.query('SELECT * from CATEGORY')])
     .then(result=>{
       
@@ -244,6 +208,7 @@ let postId=req.params.id;
 let title=req.body.title;
 let description=req.body.description;
 let categoryId =  parseInt(req.body.category);
+console.log("Category id", categoryId)
 db.query('UPDATE post SET title=? ,description=? ,category_id=? where id=?',[title,description,categoryId,postId])
 .then(result=>{
   console.log(result[0])

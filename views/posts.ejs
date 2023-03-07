@@ -21,25 +21,6 @@
     </div>
     </form>
 
-    <!-- <form action="/" method="post">
-         <div>
-        <label for="categories"><h4>Categories:</label>
-        <select id="categories">
-            <%if(categories) {%>
-                <option value="0">All</option>
-                <%categories.forEach(category => {%>
-                    <option value="<%=category.id%>"><%= category.name%></option>
-                <%})%>
-            <%}%>
-
-        </select>
-        
-         <button type="submit">Filter</butto>
-  
-    </div>
-    </form> -->
-   
-
     <%if(posts){%>
         <%posts.forEach(post => {%>
             <div class="card text-left">
